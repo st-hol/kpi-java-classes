@@ -155,25 +155,25 @@ public class AccountAnalyticsTest {
         assertEquals(accounts.get(3), idToAccountMap.get(4L));
     }
 
-    @Test
-    public void testCollectBalancesByIdForAccountsCreatedOn() {
-        Account account = accounts.get(3);
-
-        Map<String, BigDecimal> emailToBalanceMap = analytics.collectBalancesByIdForAccountsCreatedOn(account.getCreationDate().getYear());
-
-        assertEquals(Map.of(account.getEmail(), account.getBalance()), emailToBalanceMap);
-    }
-
-    @Test
-    public void testGroupFirstNamesByLastNames() {
-        Map<String, Set<String>> lastToFirstNamesMap = analytics.groupFirstNamesByLastNames();
-
-        assertEquals(4, lastToFirstNamesMap.size());
-        assertEquals(Set.of("Justin"), lastToFirstNamesMap.get("Butler"));
-        assertEquals(Set.of("Olivia"), lastToFirstNamesMap.get("Cardenas"));
-        assertEquals(Set.of("Nolan"), lastToFirstNamesMap.get("Donovan"));
-        assertEquals(Set.of("Lucas"), lastToFirstNamesMap.get("Lynn"));
-    }
+//    @Test
+//    public void testCollectBalancesByIdForAccountsCreatedOn() {
+//        Account account = accounts.get(3);
+//
+//        Map<String, BigDecimal> emailToBalanceMap = analytics.collectBalancesByIdForAccountsCreatedOn(account.getCreationDate().getYear());
+//
+//        assertEquals(Map.of(account.getEmail(), account.getBalance()), emailToBalanceMap);
+//    }
+//
+//    @Test
+//    public void testGroupFirstNamesByLastNames() {
+//        Map<String, Set<String>> lastToFirstNamesMap = analytics.groupFirstNamesByLastNames();
+//
+//        assertEquals(4, lastToFirstNamesMap.size());
+//        assertEquals(Set.of("Justin"), lastToFirstNamesMap.get("Butler"));
+//        assertEquals(Set.of("Olivia"), lastToFirstNamesMap.get("Cardenas"));
+//        assertEquals(Set.of("Nolan"), lastToFirstNamesMap.get("Donovan"));
+//        assertEquals(Set.of("Lucas"), lastToFirstNamesMap.get("Lynn"));
+//    }
 
     @Test
     public void testGroupCommaSeparatedFirstNamesByBirthdayMonth() {
