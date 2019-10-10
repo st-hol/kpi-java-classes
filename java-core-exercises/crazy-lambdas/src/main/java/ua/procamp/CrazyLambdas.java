@@ -113,7 +113,11 @@ public class CrazyLambdas {
      * @return a thread supplier
      */
     public static Supplier<Thread> runningThreadSupplier(Runnable runnable) {
-        return () -> new Thread(runnable);
+        return () -> {
+            Thread t = new Thread(runnable);
+            t.start();
+            return t;
+        };
     }
 
     /**
@@ -132,7 +136,11 @@ public class CrazyLambdas {
      * @return a function that transforms runnable into a thread supplier
      */
     public static Function<Runnable, Supplier<Thread>> runnableToThreadSupplierFunction() {
-        return r -> () -> new Thread(r);
+        return r -> () -> {
+            Thread t = new Thread(r);
+            t.start();
+            return t;
+        };
     }
 
     /**
@@ -147,7 +155,13 @@ public class CrazyLambdas {
      * @return a binary function that receiver predicate and function and compose them to create a new function
      */
     public static BiFunction<IntUnaryOperator, IntPredicate, IntUnaryOperator> functionToConditionalFunction() {
-        return (a,b)->
+        return (intUnaryOperator, intPredicate) -> tested -> {
+            if (intPredicate.test(tested)) {
+                return intUnaryOperator.applyAsInt(tested);
+            } else {
+                return tested;
+            }
+        };
     }
 
     /**
@@ -156,7 +170,7 @@ public class CrazyLambdas {
      * @return a supplier instance
      */
     public static Supplier<Supplier<Supplier<String>>> trickyWellDoneSupplier() {
-        return () -> () -> () -> "WELL DONE";
+        return () -> () -> () -> "WELL DONE!";
     }
 }
 
