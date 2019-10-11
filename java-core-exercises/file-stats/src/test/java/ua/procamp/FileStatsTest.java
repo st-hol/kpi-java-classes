@@ -8,21 +8,27 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import lombok.SneakyThrows;
+
 @RunWith(JUnit4.class)
+
 public class FileStatsTest {
 
 
     @Test
+    @SneakyThrows
     public void testCreateFileStatsFromExistingFile() {
         FileStats fileStats = FileStats.from("sotl.txt");
     }
 
     @Test(expected = FileStatsException.class)
+    @SneakyThrows
     public void testCreateFileStatsFromNonExistingFile() {
         FileStats fileStats = FileStats.from("blahblah.txt");
     }
 
     @Test
+    @SneakyThrows
     public void testGetCharCount() {
         FileStats lambdaArticleFileStats = FileStats.from("sotl.txt");
         FileStats springCloudArticleFileStats = FileStats.from("scosb.txt");
@@ -35,6 +41,7 @@ public class FileStatsTest {
     }
 
     @Test
+    @SneakyThrows
     public void testGetMostPopularCharacter() {
         FileStats lambdaArticleFileStats = FileStats.from("sotl.txt");
         FileStats springCloudArticleFileStats = FileStats.from("scosb.txt");
@@ -49,6 +56,7 @@ public class FileStatsTest {
     }
 
     @Test
+    @SneakyThrows
     public void testContainsCharacter() {
         FileStats lambdaArticleFileStats = FileStats.from("sotl.txt");
         FileStats springCloudArticleFileStats = FileStats.from("scosb.txt");
