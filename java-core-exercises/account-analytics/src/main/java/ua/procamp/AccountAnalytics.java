@@ -1,13 +1,10 @@
 package ua.procamp;
 
-import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.mapping;
 import static java.util.stream.Collectors.partitioningBy;
 import static java.util.stream.Collectors.reducing;
-import static java.util.stream.Collectors.summingInt;
-import static java.util.stream.Collectors.toSet;
 
 import ua.procamp.exception.EntityNotFoundException;
 import ua.procamp.model.Account;
@@ -205,18 +202,13 @@ public class AccountAnalytics {
      * @return a map where key is a creation month and value is total balance of all accounts created in that month
      */
     public Map<Month, BigDecimal> groupTotalBalanceByCreationMonth() {
-        return accounts.stream()
-                .collect(groupingBy(account -> account.getBirthday().getMonth(), summingInt()));
-
-//        Map<Month, BigDecimal> map = accounts.stream()
-//                .collect(Collectors.groupingBy(account->account.getBirthday().getMonth(),
-//                        reducing(BigDecimal.ZERO, BigDecimal::add)));
-//        System.out.println(map);
-//        return map;
-
+        Map<Month, BigDecimal> map = accounts.stream()
+                .collect(groupingBy(account -> account.getCreationDate().getMonth(),
+                        mapping(Account::getBalance, reducing(BigDecimal.ZERO, BigDecimal::add))
+                       ));//summingDouble(BigDecimal::doubleValue)
+        System.out.println(map);
+        return map;
     }
-
-    //https://4comprehension.com/the-ultimate-guide-to-the-java-stream-api-groupingby-collector/
 
     /**
      * Returns a {@link Map} where key is a letter {@link Character}, and value is a number of its occurrences in
@@ -253,6 +245,20 @@ public class AccountAnalytics {
     }
 
 }
+
+
+
+
+//        Map<Month, BigDecimal> map = accounts.stream()
+//                .collect(Collectors.groupingBy(account->account.getBirthday().getMonth(),
+//                        reducing(BigDecimal.ZERO, BigDecimal::add)));
+//        System.out.println(map);
+//        return map;
+
+//https://4comprehension.com/the-ultimate-guide-to-the-java-stream-api-groupingby-collector/
+
+
+
 
 //        return accounts.stream()
 //                .map(account -> account.getFirstName() + account.getLastName())
