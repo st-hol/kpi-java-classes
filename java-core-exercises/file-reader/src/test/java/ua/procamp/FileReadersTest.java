@@ -6,10 +6,13 @@ import org.junit.runners.JUnit4;
 
 import static org.junit.Assert.assertEquals;
 
+import lombok.SneakyThrows;
+
 @RunWith(JUnit4.class)
 public class FileReadersTest {
 
     @Test
+    @SneakyThrows
     public void testReadWholeFileOnEmptyFile() {
         String fileContent = FileReaders.readWholeFile("empty.txt");
 
@@ -18,6 +21,7 @@ public class FileReadersTest {
     }
 
     @Test
+    @SneakyThrows
     public void testReadWholeFileOnFileWithEmptyLines() {
         String fileContent = FileReaders.readWholeFile("lines.txt");
 
@@ -29,6 +33,7 @@ public class FileReadersTest {
     }
 
     @Test
+    @SneakyThrows
     public void testReadWholeFile() {
         String fileContent = FileReaders.readWholeFile("simple.txt");
 
