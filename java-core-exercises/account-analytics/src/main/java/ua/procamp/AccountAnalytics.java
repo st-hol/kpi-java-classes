@@ -256,7 +256,7 @@ public class AccountAnalytics {
 //        return map;
 
 //https://4comprehension.com/the-ultimate-guide-to-the-java-stream-api-groupingby-collector/
-
+//https://habr.com/ru/post/348536/
 
 
 
