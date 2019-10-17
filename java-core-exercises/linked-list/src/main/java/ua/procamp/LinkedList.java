@@ -37,9 +37,6 @@ public class LinkedList<T> implements List<T> {
      */
     @Override
     public void add(T element) {
-        if (element == null) {
-            return;
-        }
         if (first == null) {
             first = new Node<>(element);
         } else {
@@ -53,13 +50,10 @@ public class LinkedList<T> implements List<T> {
     /**
      * Add element at first. set the newly created node as root node
      *
-     * @param data
+     * @param element
      */
-    public void addAtFirst(T data) {
-        if (data == null) {
-            return;
-        }
-        Node<T> newNode = new Node<>(data);
+    public void addAtFirst(T element) {
+        Node<T> newNode = new Node<>(element);
         if (this.first != null) {
             newNode.setNextNode(this.first);
             this.first = newNode;
@@ -82,9 +76,9 @@ public class LinkedList<T> implements List<T> {
             addAtFirst(element);
             return;
         }
-        if (index == this.size) {
+        if (index == size) {
             add(element);
-        } else if (index < this.size) {
+        } else if (index < size) {
             Node<T> newNode = new Node<>(element);
             Node<T> leftNode = getNode(index - 1);
             Node<T> rightNode = getNode(index);
@@ -105,15 +99,14 @@ public class LinkedList<T> implements List<T> {
      */
     @Override
     public void set(int index, T element) {
-        if (index >= 0 && index < size - 1) {
+        if (index < 0 || index > this.size - 1) {
+            throw new IndexOutOfBoundsException("Index not available.");
+        } else {
             Node<T> node = getNode(index);
             assert node != null;
             node.setData(element);
-        } else {
-            throw new IndexOutOfBoundsException("Index not available.");
         }
     }
-
 
     /**
      * Retrieves an elements by its position index. In case provided index in out of the list bounds it
@@ -162,7 +155,6 @@ public class LinkedList<T> implements List<T> {
         size--;
     }
 
-
     /**
      * Checks if a specific exists in he list
      *
@@ -171,8 +163,8 @@ public class LinkedList<T> implements List<T> {
     @Override
     public boolean contains(T element) {
         boolean contains = false;
-        for(int i = size-1; i >=0; i--){
-            if (Objects.requireNonNull(getNode(i)).getData().equals(element)){
+        for (int i = size - 1; i >= 0; i--) {
+            if (Objects.requireNonNull(getNode(i)).getData().equals(element)) {
                 contains = true;
                 break;
             }
@@ -197,7 +189,7 @@ public class LinkedList<T> implements List<T> {
      */
     @Override
     public int size() {
-        return this.size;
+        return size;
     }
 
     /**
@@ -205,25 +197,25 @@ public class LinkedList<T> implements List<T> {
      */
     @Override
     public void clear() {
-        this.first = null;
-        this.size = 0;
+        first = null;
+        size = 0;
 //        for(int i = size-1; i >= 0; i--){
 //            remove(i);
 //        }
     }
 
     private Node<T> getNode(int index) {
-        if (index < 0 || index > this.size - 1) {
+        if (index < 0 || index > size - 1) {
             throw new IndexOutOfBoundsException("Index not available.");
         }
         if (index == 0) {
-            return this.first;
+            return first;
         }
         if (index == this.size - 1) {
-            return getLastNode(this.first);
+            return getLastNode(first);
         }
         int pointer = 0;
-        Node<T> pointerNode = this.first;
+        Node<T> pointerNode = first;
         while (pointer <= index) {
             if (pointer == index) {
                 return pointerNode;
@@ -278,21 +270,6 @@ public class LinkedList<T> implements List<T> {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

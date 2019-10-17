@@ -25,7 +25,7 @@ public class LinkedQueue<T> implements Queue<T> {
      * @param element the element to add
      */
     public void add(T element) {
-        Node<T> node = new Node<T>(element);
+        Node<T> node = new Node<>(element);
 
         if (isEmpty()) {
             first = node;
