@@ -15,7 +15,8 @@ public class LinkedQueue<T> implements Queue<T> {
 
     public LinkedQueue() {
         size = 0;
-        first = last = null;
+        first = null;
+        last = null;
     }
 
     /**
@@ -100,3 +101,40 @@ public class LinkedQueue<T> implements Queue<T> {
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//http://faculty.washington.edu/moishe/javademos/ch07%20Code/jss2/LinkedQueue.java
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
